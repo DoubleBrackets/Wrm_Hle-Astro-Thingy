@@ -48,7 +48,7 @@ public class ExplosiveAmmo : MonoBehaviour
         {
             Vector2 dir = lockedOn.transform.position - transform.position;
             Vector2 cVec = rb.velocity;
-            float angle = Vector2.Angle(cVec, dir);
+            float angle = Vector2.SignedAngle(cVec, dir);
             rb.velocity = Quaternion.Euler(0,0,homingForce*0.08f*angle)*rb.velocity;
         }
  

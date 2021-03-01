@@ -20,7 +20,7 @@ public class OrbOfRestoreScript : MonoBehaviour
     {
         Vector2 dir = target.transform.position - transform.position;
         Vector2 cVec = rb.velocity;
-        float angle = Vector2.Angle(cVec, dir);
+        float angle = Vector2.SignedAngle(cVec, dir);
         rb.velocity = Quaternion.Euler(0, 0, 3 * 0.08f * angle) * rb.velocity;
         if(dir.magnitude < 0.1f)
         {

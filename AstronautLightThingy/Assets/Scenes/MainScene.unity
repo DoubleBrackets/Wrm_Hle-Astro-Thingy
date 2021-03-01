@@ -430,7 +430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8600000, guid: a7a4cd9ac05fe46429b1826ddef81786, type: 2}
+  m_Texture: {fileID: 8400000, guid: e133225501123894ba3aa1f6e57166c5, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2408,6 +2408,22 @@ PrefabInstance:
     - target: {fileID: 701774637, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
       propertyPath: maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318939841, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318939843, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: e133225501123894ba3aa1f6e57166c5, type: 2}
+    - target: {fileID: 1318939843, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318939843, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
       propertyPath: ammoTypes.Array.data[1].energyCost
