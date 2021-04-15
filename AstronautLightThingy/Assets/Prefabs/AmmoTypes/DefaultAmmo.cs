@@ -36,8 +36,8 @@ public class DefaultAmmo : MonoBehaviour
         }
         else
         {
-            GameObject particles = Instantiate(particleEffect, hit.point, transform.rotation);
-            Destroy(particles, 0.7f);
+/*            GameObject particles = Instantiate(particleEffect, hit.point, transform.rotation);
+            Destroy(particles, 0.7f);*/
             ProcGenTileScript.instance.DestroyTile(hit.point+dir.normalized*0.01f);
         }
 

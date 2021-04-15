@@ -100,25 +100,30 @@ public class EyeLaserEnemy : MonoBehaviour
         Audio.instance.playLazer();
         float angle = dir.Angle();
         Vector2 norm = dir.normalized;
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(width, 0.01f), angle, dir, range*2f,enemyBase.terrainMask | enemyBase.playerMask);
-        Collider2D terrainBuffer = Physics2D.OverlapBox(transform.position, new Vector2(width, 0.01f), angle, enemyBase.terrainMask);
-        if (terrainBuffer != null)
+        float tempRange = range*2;
+        //Casts for tiles
+
+        for(int x = -1;x <= 1;x++)
         {
-            Vector2 left = norm.PerpendicularVector(-1) * width / 2f;
-            Vector2 pos = terrainBuffer.transform.position;
-            bool hitterrain = false;
-            for (float x = 0.1f; x <= 0.5f; x += 0.01f)
+            var tileHits = ProcGenTileScript.instance.TileRayCastAll((Vector2)transform.position+dir.normalized.PerpendicularVector(x)*width*0.3f, dir, range * 2f);
+            if (tileHits.Count > 0)
             {
-                bool val = ProcGenTileScript.instance.DestroyTile(pos + norm * x + left);
-                bool val2 = ProcGenTileScript.instance.DestroyTile(pos + norm * x - left);
-                bool val3 = ProcGenTileScript.instance.DestroyTile(pos + norm * x);
-                hitterrain = val || val2 || val3 || hitterrain;
+                float hitRange = ((Vector2)transform.position - ProcGenTileScript.instance.TileToPosition(tileHits[0])).magnitude + 0.4f;
+                if (hitRange < tempRange)
+                {
+                    tempRange = hitRange;
+                }
+                foreach (Vector3Int hit in tileHits)
+                {
+                    if (((Vector2)transform.position - ProcGenTileScript.instance.TileToPosition(hit)).magnitude > hitRange)
+                        break;
+                    ProcGenTileScript.instance.DestroyTile(hit);
+                }
             }
-            if (hitterrain)
-                return (pos - (Vector2)transform.position).magnitude + 0.5f;
         }
-        if (hits.Length == 0)
-            return range*2;
+
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(width, 0.01f), angle, dir, tempRange, enemyBase.playerMask);
+  
         foreach (RaycastHit2D hit in hits)
         {
             LayerMask layer = 1 << hit.collider.gameObject.layer;
@@ -127,23 +132,9 @@ public class EyeLaserEnemy : MonoBehaviour
             {
                 g.GetComponent<EntityScript>().TakeDamage(damage, dir, knockbackForce);
             }
-            else
-            {
-                Vector2 left = norm.PerpendicularVector(-1) * width / 2f;
-                Vector2 pos = hit.point;
-                bool hitterrain = false;
-                for (float x = 0.1f; x <= 0.5f; x += 0.01f)
-                {
-                    bool val = ProcGenTileScript.instance.DestroyTile(pos + norm * x+left);
-                    bool val2 = ProcGenTileScript.instance.DestroyTile(pos + norm * x-left);
-                    bool val3 = ProcGenTileScript.instance.DestroyTile(pos + norm * x);
-                    hitterrain = val||val2||val3 || hitterrain;
-                }
-                if (hitterrain) 
-                    return (hit.point - (Vector2)transform.position).magnitude + 0.5f;
-            }
         }
-        return range*2f;
+
+        return tempRange;
     }
 
 }

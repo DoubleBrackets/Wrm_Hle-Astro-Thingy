@@ -189,12 +189,17 @@ public class ProcGenTileScript : MonoBehaviour
     public bool DestroyTile(Vector2 pos)
     {
         Vector3Int tilecoords = tileMap.WorldToCell(pos);
+        return DestroyTile(tilecoords);
+    }
+
+    public bool DestroyTile(Vector3Int tilecoords)
+    {
         if (tileMap.GetTile(tilecoords) == null)
             return false;
         tileMap.SetTile(tilecoords, null);
         GameObject g = destroyParticles[counter];
         g.SetActive(true);
-        g.transform.position = pos;
+        g.transform.position = TileToPosition(tilecoords);
         counter++;
         if (counter == count)
             counter = 0;
@@ -215,4 +220,61 @@ public class ProcGenTileScript : MonoBehaviour
         }
         return tiles[0].tileobj;
     }
+
+
+    public List<Vector3Int> TileRayCastAll(Vector2 origin, Vector2 dir, float distance)
+    {
+        var hits = new List<Vector3Int>();
+        float xSize = tileMap.cellSize.x;
+        float ySize = tileMap.cellSize.y;
+
+        Vector3Int currentTile = tileMap.WorldToCell(origin);
+        if (tileMap.GetTile(currentTile) != null)
+            hits.Add(currentTile);
+
+        float theta = dir.Angle() * Mathf.Deg2Rad;
+        float sinInverse = Mathf.Abs(1 / Mathf.Sin(theta));
+        float cosInverse = Mathf.Abs(1 / Mathf.Cos(theta));
+
+        //Calculating distances
+
+        int xDirSign = (int)Mathf.Sign(dir.x);
+        int yDirSign = (int)Mathf.Sign(dir.y);
+        int xPosSign = (int)Mathf.Sign(origin.x);
+        int yPosSign = (int)Mathf.Sign(origin.y);
+
+        float xDist = cosInverse * Mathf.Abs(origin.x - ((int)(origin.x / xSize) * xSize + xPosSign * 0.5f * (1 + xDirSign * xPosSign) * xSize));
+        float yDist = sinInverse * Mathf.Abs(origin.y - ((int)(origin.y / ySize) * ySize + yPosSign * 0.5f * (1 + yDirSign * yPosSign) * ySize));
+
+        float yDistIncrement = sinInverse * ySize;
+        float xDistIncrement = cosInverse * xSize;
+
+        for (int x = 0; x <= 10000; x++)
+        {
+
+            if (xDist < yDist && xDist <= distance)
+            {
+                currentTile.x += xDirSign;
+                if (tileMap.GetTile(currentTile) != null)
+                    hits.Add(currentTile);
+                xDist += xDistIncrement;
+            }
+            else if (xDist >= yDist && yDist <= distance)
+            {
+                currentTile.y += yDirSign;
+                if (tileMap.GetTile(currentTile) != null)
+                    hits.Add(currentTile);
+                yDist += yDistIncrement;
+            }
+            else
+                break;
+        }
+
+        return hits;
+    }
+    public Vector2 TileToPosition(Vector3Int p)
+    {
+        return tileMap.CellToWorld(p);
+    }
+
 }

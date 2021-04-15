@@ -13,8 +13,8 @@ public class PlayerWeaponScript : MonoBehaviour
 
     private float shootCooldown = 0;
 
-    public int energy;
-    public int maxEnergy;
+    public float energy;
+    public float maxEnergy;
 
     public AmmoType[] ammoTypes;
     public Vector2 barrelOffset;
@@ -25,7 +25,7 @@ public class PlayerWeaponScript : MonoBehaviour
         public float cooldown;
         public Color iconColor;
         public float recoilForce;
-        public int energyCost;
+        public float energyCost;
     }
 
     private void Awake()
@@ -49,13 +49,17 @@ public class PlayerWeaponScript : MonoBehaviour
 
         RotateSprite(angle);
 
-        if(Input.GetMouseButton(0) && shootCooldown <= 0 && energy > 0)
+        if(Input.GetMouseButton(0) && shootCooldown <= 0 && energy > ammoTypes[0].energyCost)
         {
             Shoot(shootVec,0);
         }  
-        else if(Input.GetMouseButton(1) && shootCooldown <= 0 && energy > 0)
+        else if(Input.GetKeyDown(KeyCode.Space) && shootCooldown <= 0 && energy >= ammoTypes[1].energyCost)
         {
             Shoot(shootVec, 1);
+        }
+        else if(Input.GetMouseButton(1) && shootCooldown <= 0 && energy > ammoTypes[2].energyCost)
+        {
+            Shoot(shootVec, 2);
         }
     }
 
@@ -64,8 +68,6 @@ public class PlayerWeaponScript : MonoBehaviour
         Audio.instance.playShoot();
         shootVec = shootVec.normalized;
         PlayerParticleManager.playerParticleManager.PlayParticle("ShootParticles");
-        //wanker 45 degree offset because impulse is being ass
-        CineMachineImpulseManager.instance.Impulse(-shootVec.normalized);
         //Gets ammotype and isntantiates it
         AmmoType type = ammoTypes[index];
         AddEnergy( -type.energyCost);
@@ -74,6 +76,7 @@ public class PlayerWeaponScript : MonoBehaviour
         shootCooldown = type.cooldown;
         //recoil
         MoveScript.rb.AddForce(-shootVec * type.recoilForce);
+        CineMachineImpulseManager.instance.Impulse(-shootVec * type.recoilForce/8f);
     }
 
     void RotateSprite(float angle)
@@ -86,7 +89,7 @@ public class PlayerWeaponScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    public void AddEnergy(int val)
+    public void AddEnergy(float val)
     {
         energy += val;
         if (energy > maxEnergy)

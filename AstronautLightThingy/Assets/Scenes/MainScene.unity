@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -262,7 +262,7 @@ Transform:
   - {fileID: 1115754417}
   - {fileID: 718042698}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297299461
 GameObject:
@@ -454,7 +454,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 167644184159529420, guid: d409461ae0a7ca0468a604b3956dc4bd, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 167644184159529420, guid: d409461ae0a7ca0468a604b3956dc4bd, type: 3}
       propertyPath: m_LocalScale.x
@@ -569,7 +569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &607922395
 GameObject:
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 2cae1274213f5ef458f427c413a53293, type: 2}
-    m_AmplitudeGain: 0.08
+    m_AmplitudeGain: 0.09
     m_FrequencyGain: 1
     m_RepeatMode: 0
     m_Randomize: 1
@@ -650,12 +650,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607922395}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1734791081}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &718042695
 GameObject:
@@ -2426,9 +2426,57 @@ PrefabInstance:
       value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: maxEnergy
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[1].cooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].cooldown
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
       propertyPath: ammoTypes.Array.data[1].energyCost
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].energyCost
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[0].recoilForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[1].recoilForce
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].iconColor.b
+      value: 0.5943396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].iconColor.g
+      value: 0.5943396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].iconColor.r
+      value: 0.5943396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].recoilForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989044804, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
+      propertyPath: ammoTypes.Array.data[2].projectilePrefab
+      value: 
+      objectReference: {fileID: 8818833650844381375, guid: 59fe0fc759be54c4dac24e2e7117ac3e, type: 3}
     - target: {fileID: 2787536730690028292, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2483,7 +2531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2787536730690028312, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
       propertyPath: fuelUsePerSecond
-      value: 2.75
+      value: 2.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8504b36dcff5e9439f708d38bea324b, type: 3}
@@ -2914,7 +2962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107514154744352802, guid: 3a61967ba4d5e6940a35f3bc078b6242, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7107514154744352802, guid: 3a61967ba4d5e6940a35f3bc078b6242, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2967,7 +3015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 363502005114721026, guid: ffb34ff4368aa804bb1285abf5ed647a, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 363502005114721026, guid: ffb34ff4368aa804bb1285abf5ed647a, type: 3}
       propertyPath: m_LocalPosition.x

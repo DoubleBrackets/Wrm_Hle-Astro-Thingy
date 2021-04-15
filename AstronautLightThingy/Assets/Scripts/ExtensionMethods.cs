@@ -74,8 +74,10 @@ public static class ExtensionMethods
 
     public static Vector2 PerpendicularVector(this Vector2 vec,int dir)
     {
-        if(dir == 1)
+        if (dir == 1)
             return new Vector2(-vec.y, vec.x);
+        else if (dir == 0)
+            return vec;
         return new Vector2(vec.y, -vec.x);
     }
 
