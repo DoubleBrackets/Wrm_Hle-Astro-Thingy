@@ -1,6 +1,6 @@
 Wrm_Hle Astro Thingy
 
-A rogue-like 2D space shooter. Made in 48 hours for Winter Codeday 2021.
+A rogue-like 2D space shooter. Made in 48 hours for Winter Codeday 2021 using Unity Game Engine.
 
 Contributors:
 Star, Doublebrackets - Dev
